@@ -18,11 +18,11 @@ class Fila {
 	int numeroDeDFila
 
 	new(int cantidadDeCasilleros) {
-		this.cantidadDeCasilleros = cantidadDeCasilleros
+		this.definirCantidadDeCasilleros(cantidadDeCasilleros)
 		this.crearCasilleros()
 	}
 
-	def setCantidadDeCasilleros(int cantidadDeCasillerosPorFila) {
+	def definirCantidadDeCasilleros(int cantidadDeCasillerosPorFila) {
 		if (cantidadDeCasillerosPorFila < 1)
 			throw new ConfigurationException("Cantidad de casilleros por fila no valido: " + cantidadDeCasillerosPorFila)
 		cantidadDeCasilleros = cantidadDeCasillerosPorFila
@@ -59,7 +59,7 @@ class Fila {
 		cantidadDeCasillerosLibres > 0
 	}
 
-	def setTipo(TipoDePlanta tipoDePlanta) {
+	def definirTipo(TipoDePlanta tipoDePlanta) {
 		tipo = tipoDePlanta
 	}
 

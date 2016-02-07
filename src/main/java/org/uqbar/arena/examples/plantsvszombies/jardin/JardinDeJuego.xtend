@@ -21,8 +21,8 @@ class JardinDeJuego implements Jardin {
 
 	def void crearTablero(int numeroDeFilas, int numeroDeCasilleros) {
 		filas = new ArrayList
-		this.numeroDeFilas = numeroDeFilas
-		this.numeroDeCasilleros = numeroDeCasilleros
+		this.definirNumeroDeFilas(numeroDeFilas)
+		this.definirNumeroDeCasilleros(numeroDeCasilleros)
 		for (i : 0 ..< numeroDeFilas) {
 			val fila = new Fila(numeroDeCasilleros)
 			setearTipoAlaFila(fila)
@@ -41,13 +41,13 @@ class JardinDeJuego implements Jardin {
 		}
 	}
 
-	def setNumeroDeFilas(int numeroDeFilasDelTablero) {
+	def void definirNumeroDeFilas(int numeroDeFilasDelTablero) {
 		if (numeroDeFilasDelTablero < 1)
 			throw new ConfigurationException("Numero de filas del tablero no valido: " + numeroDeFilasDelTablero)
 		this.numeroDeFilas = numeroDeFilasDelTablero
 	}
 
-	def setNumeroDeCasilleros(int numeroDeCasillerosDeCadaFila) {
+	def definirNumeroDeCasilleros(int numeroDeCasillerosDeCadaFila) {
 		if (numeroDeCasillerosDeCadaFila < 1 || numeroDeCasillerosDeCadaFila > getNumeroDeCasillerosPorFila)
 			throw new ConfigurationException(
 				"Numero de casilleros de cada fila del tablero no valido: " + numeroDeCasillerosDeCadaFila)

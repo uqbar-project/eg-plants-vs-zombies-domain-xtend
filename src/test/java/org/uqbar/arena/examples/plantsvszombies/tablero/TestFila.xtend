@@ -21,13 +21,14 @@ class TestFila {
 	def void init() {
 		fila = new Fila(5)
 		tipo = new TipoTerrestre
-		fila.tipo = tipo
+		fila.definirTipo(tipo)
 
 		planta = new Planta => [
 			potenciaDeAtaque = 15
 			resistencia = 15
 			nombre = "Meduza"
-			tipo = new TipoTerrestre
+			// ojo que si hacemos tipo = xxx toma en cuenta el de la clase actual
+			setTipo(new TipoTerrestre)
 			validar
 		]
 	}

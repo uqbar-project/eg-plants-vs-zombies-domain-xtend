@@ -70,7 +70,7 @@ class TestJardinDeJuego {
 	@Test(expected=typeof(NoHayLugarException))
 	def void noHayLugarEnLaFila() {
 		var tipo = planta.tipo
-		jardin.getNumeroDeFila(1).tipo = tipo
+		jardin.getNumeroDeFila(1).definirTipo(tipo)
 		for (i : 0 .. jardin.numeroDeCasillerosPorFila) {
 			jardin.agregarPlantaAlaFila(planta, 1)
 		}
