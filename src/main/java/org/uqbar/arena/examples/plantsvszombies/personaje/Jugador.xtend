@@ -25,4 +25,9 @@ class Jugador {
 		}
 		recursos = recursos + nuevosRecursos
 	}
+	
+	def descontarRecursos(int valor) {
+		recursos = recursos - valor
+	}
+	
 }

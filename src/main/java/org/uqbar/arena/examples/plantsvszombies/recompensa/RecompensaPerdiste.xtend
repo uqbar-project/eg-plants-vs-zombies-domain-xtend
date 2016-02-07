@@ -9,9 +9,11 @@ class RecompensaPerdiste extends Recompensa {
 	}
 
 	override generarRecompensa() {
-		log.clear
-		log.add("El zombie " + zombie.nombre + " vencio a todas tus plantas del jardin.")
-		log.add("Intenta nuevamente.")
+		log => [
+			clear
+			add("El zombie " + zombie.nombre + " vencio a todas tus plantas del jardin.")
+			add("Intenta nuevamente.")
+		]
 	}
 
 }

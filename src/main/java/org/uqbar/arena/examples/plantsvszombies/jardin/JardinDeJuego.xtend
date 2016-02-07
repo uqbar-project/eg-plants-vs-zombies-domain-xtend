@@ -21,12 +21,12 @@ class JardinDeJuego implements Jardin {
 
 	def void crearTablero(int numeroDeFilas, int numeroDeCasilleros) {
 		filas = new ArrayList
-		this.setNumeroDeFilas(numeroDeFilas)
-		this.setNumeroDeCasilleros(numeroDeCasilleros)
+		this.numeroDeFilas = numeroDeFilas
+		this.numeroDeCasilleros = numeroDeCasilleros
 		for (i : 0 ..< numeroDeFilas) {
 			val fila = new Fila(numeroDeCasilleros)
 			setearTipoAlaFila(fila)
-			fila.setNumeroDeDFila(i)
+			fila.numeroDeDFila = i
 			filas.add(fila)
 		}
 	}
@@ -35,9 +35,9 @@ class JardinDeJuego implements Jardin {
 		val rand = new Random()
 		val x = rand.nextInt(2)
 		if (0 == x) {
-			fila.setTipo(new TipoAcuatica)
+			fila.tipo = new TipoAcuatica
 		} else {
-			fila.setTipo(new TipoTerrestre)
+			fila.tipo = new TipoTerrestre
 		}
 	}
 

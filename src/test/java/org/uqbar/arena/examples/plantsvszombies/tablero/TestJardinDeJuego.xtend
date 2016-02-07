@@ -70,7 +70,7 @@ class TestJardinDeJuego {
 	@Test(expected=typeof(NoHayLugarException))
 	def void noHayLugarEnLaFila() {
 		var tipo = planta.tipo
-		jardin.getNumeroDeFila(1).setTipo(tipo)
+		jardin.getNumeroDeFila(1).tipo = tipo
 		for (i : 0 .. jardin.numeroDeCasillerosPorFila) {
 			jardin.agregarPlantaAlaFila(planta, 1)
 		}
@@ -80,8 +80,8 @@ class TestJardinDeJuego {
 	@Test
 	def void cantidadTotalDePlantasEnElJardin() {
 		val tipo = planta.tipo
-		jardin.getNumeroDeFila(1).setTipo(tipo)
-		jardin.getNumeroDeFila(0).setTipo(tipo)
+		jardin.getNumeroDeFila(1).tipo = tipo
+		jardin.getNumeroDeFila(0).tipo = tipo
 		jardin.agregarPlantaAlaFila(planta, 1)
 		jardin.agregarPlantaAlaFila(planta, 0)
 		assertEquals(2, jardin.cantidadDePlantasDeUnTipo(tipo))

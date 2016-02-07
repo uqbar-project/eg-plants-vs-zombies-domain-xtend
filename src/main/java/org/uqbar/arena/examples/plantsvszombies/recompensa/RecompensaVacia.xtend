@@ -9,8 +9,10 @@ class RecompensaVacia extends Recompensa {
 	}
 
 	override generarRecompensa() {
-		log.add("Pero lamentablemente no obtuviste ninguna recompensa.")
-		log.add("Intenta nuevamente")
+		log => [
+			add("Pero lamentablemente no obtuviste ninguna recompensa.")
+			add("Intenta nuevamente")
+		]
 	}
 
 }

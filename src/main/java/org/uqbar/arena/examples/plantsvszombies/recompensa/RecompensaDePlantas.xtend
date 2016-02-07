@@ -2,21 +2,21 @@ package org.uqbar.arena.examples.plantsvszombies.recompensa
 
 import org.uqbar.arena.examples.plantsvszombies.zombie.Zombie
 import org.uqbar.arena.examples.plantsvszombies.jardin.JardinZen
-import org.uqbar.arena.examples.plantsvszombies.home.HomePlantas
+import org.uqbar.arena.examples.plantsvszombies.repo.RepoPlantas
 
 class RecompensaDePlantas extends Recompensa {
 
-	HomePlantas homePlantas
+	RepoPlantas repoPlantas
 	JardinZen jardinZen
 
-	new(Zombie zombie, JardinZen unJardin, HomePlantas laHomePlantas) {
+	new(Zombie zombie, JardinZen unJardin, RepoPlantas elRepoPlantas) {
 		super(zombie)
-		homePlantas = laHomePlantas
+		repoPlantas = elRepoPlantas
 		jardinZen = unJardin
 	}
 
 	def getPlantaDeRecompensa() {
-		val planta = homePlantas.getUnaPlantaDeRecompensa
+		val planta = repoPlantas.getUnaPlantaDeRecompensa
 		jardinZen.agregarPlanta(planta)
 		planta
 	}

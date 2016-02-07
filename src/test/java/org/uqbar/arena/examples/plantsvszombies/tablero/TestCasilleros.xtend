@@ -27,7 +27,7 @@ class TestCasilleros {
 
 	@Test
 	def void estaOcupadoElCasillero() {
-		casillero.setPlanta(planta)
+		casillero.planta = planta
 		assertTrue(casillero.estasOcupado)
 	}
 

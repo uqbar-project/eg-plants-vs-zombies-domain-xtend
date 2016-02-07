@@ -18,7 +18,7 @@ class Fila {
 	int numeroDeDFila
 
 	new(int cantidadDeCasilleros) {
-		this.setCantidadDeCasilleros(cantidadDeCasilleros)
+		this.cantidadDeCasilleros = cantidadDeCasilleros
 		this.crearCasilleros()
 	}
 
@@ -52,11 +52,11 @@ class Fila {
 			throw new NoHayLugarException(
 				"No hay lugar en la fila para agregar una nueva planta en el casillero " + (numeroDeCasillero + 1))
 
-		casillero.setPlanta(planta.clone as Planta)
+		casillero.planta = planta.clone as Planta
 	}
 
 	def hayLugarDisponible() {
-		(casilleros.filter[c|c.estasLibre]).size > 0
+		cantidadDeCasillerosLibres > 0
 	}
 
 	def setTipo(TipoDePlanta tipoDePlanta) {
@@ -64,7 +64,7 @@ class Fila {
 	}
 
 	def cantidadDeCasillerosLibres() {
-		(getCasilleros.filter[c|c.estasLibre]).size
+		casillerosLibres.size
 	}
 
 	def int cantidadDeCasillerosOcupados() {
@@ -80,24 +80,27 @@ class Fila {
 	}
 
 	def estaVacia() {
-		val casillerosLibres = casilleros.filter[c|c.estasLibre].size
-		casillerosLibres == casilleros.size
+		cantidadDeCasillerosLibres == casilleros.size
 	}
 
 	def removerPlantasMuertas() {
-		for (Casillero c : casilleros) {
-			if (c.estaMuertaLaPlanta) {
-				c.eliminaLaPlanta
+		for (Casillero casillero : casilleros) {
+			if (casillero.estaMuertaLaPlanta) {
+				casillero.eliminaLaPlanta
 			}
 		}
 	}
 
 	def agregaUnaPlanta(Planta planta) {
-		val casilleroLibre = casilleros.filter[c|c.estasLibre].toList
-		if (casilleroLibre.size == 0) {
+		val casillerosLibres = casillerosLibres()
+		if (casillerosLibres.isEmpty) {
 			throw new NoHayLugarException("No hay lugar para agregar a la planta " + planta.nombre)
 		}
-		casilleroLibre.get(0).planta = planta
+		casillerosLibres.get(0).planta = planta
+	}
+	
+	def casillerosLibres() {
+		casilleros.filter[casillero | casillero.estasLibre].toList
 	}
 
 }

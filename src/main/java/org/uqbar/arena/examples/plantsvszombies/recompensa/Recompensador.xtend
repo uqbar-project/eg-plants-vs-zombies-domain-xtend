@@ -3,18 +3,18 @@ package org.uqbar.arena.examples.plantsvszombies.recompensa
 import java.util.List
 import java.util.Random
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.arena.examples.plantsvszombies.home.HomePlantas
 import org.uqbar.arena.examples.plantsvszombies.jardin.JardinZen
 import org.uqbar.arena.examples.plantsvszombies.personaje.Jugador
 import org.uqbar.arena.examples.plantsvszombies.zombie.Zombie
 import org.uqbar.commons.utils.Observable
+import org.uqbar.arena.examples.plantsvszombies.repo.RepoPlantas
 
 @Observable
 @Accessors
 class Recompensador implements RecompensaObserver {
 
 	Zombie zombie
-	HomePlantas homePlantas
+	RepoPlantas repoPlantas
 	JardinZen jardinZen
 	Jugador jugador
 	Recompensa recompensa
@@ -29,7 +29,7 @@ class Recompensador implements RecompensaObserver {
 		if (getNumeroRandomEntreCeroYuno <= 0.5) {
 			recompensa = new RecompensaVacia(zombie)
 		} else if (getNumeroRandomEntreCeroYuno <= 0.5) {
-			recompensa = new RecompensaDePlantas(zombie, jardinZen, homePlantas)
+			recompensa = new RecompensaDePlantas(zombie, jardinZen, repoPlantas)
 		} else {
 			recompensa = new RecompensaZombie(zombie, jugador)
 		}

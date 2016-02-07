@@ -21,20 +21,20 @@ class TestFila {
 	def void init() {
 		fila = new Fila(5)
 		tipo = new TipoTerrestre
-		fila.setTipo(tipo)
+		fila.tipo = tipo
 
 		planta = new Planta => [
 			potenciaDeAtaque = 15
 			resistencia = 15
 			nombre = "Meduza"
-			setTipo(new TipoTerrestre)
+			tipo = new TipoTerrestre
 			validar
 		]
 	}
 
 	@Test
 	def void crearFilaConCincoCasilleros() {
-		assertEquals(5, fila.getCantidadDeCasilleros)
+		assertEquals(5, fila.cantidadDeCasilleros)
 	}
 
 	@Test
@@ -46,7 +46,7 @@ class TestFila {
 
 	@Test(expected=typeof(TipoInvalidoDePlantaException))
 	def void noSePuedeAgregarUnaPlantaDeDistintoTipo() {
-		planta.setTipo(new TipoAcuatica)
+		planta.tipo = new TipoAcuatica
 		fila.agregaUnaPlantaAlCasillero(planta, 0)
 	}
 

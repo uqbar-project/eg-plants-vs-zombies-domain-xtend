@@ -14,7 +14,7 @@ class MejoradorDePlantas {
 	def mejorar(Planta unaPlanta, Mejora unaMejora) {
 		validarRecursos(unaMejora.costo)
 		unaMejora.mejorar(unaPlanta)
-		jugador.recursos = jugador.recursos - unaMejora.costo
+		jugador.descontarRecursos(unaMejora.costo)
 	}
 
 	def validarRecursos(int costo) {

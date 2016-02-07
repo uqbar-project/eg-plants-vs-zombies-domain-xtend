@@ -6,8 +6,6 @@ import java.util.Random
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.arena.examples.plantsvszombies.ataque.Ataque
 import org.uqbar.arena.examples.plantsvszombies.exception.PlantsVsZombiesException
-import org.uqbar.arena.examples.plantsvszombies.home.HomeMejoras
-import org.uqbar.arena.examples.plantsvszombies.home.HomeZombies
 import org.uqbar.arena.examples.plantsvszombies.jardin.Fila
 import org.uqbar.arena.examples.plantsvszombies.jardin.JardinDeJuego
 import org.uqbar.arena.examples.plantsvszombies.jardin.JardinZen
@@ -24,7 +22,9 @@ import org.uqbar.arena.examples.plantsvszombies.zombie.Zombie
 import org.uqbar.commons.model.UserException
 import org.uqbar.commons.utils.ApplicationContext
 import org.uqbar.commons.utils.Observable
-import org.uqbar.arena.examples.plantsvszombies.home.HomePlantas
+import org.uqbar.arena.examples.plantsvszombies.repo.RepoMejoras
+import org.uqbar.arena.examples.plantsvszombies.repo.RepoPlantas
+import org.uqbar.arena.examples.plantsvszombies.repo.RepoZombies
 
 /**
  * 
@@ -32,11 +32,11 @@ import org.uqbar.arena.examples.plantsvszombies.home.HomePlantas
 @Observable
 @Accessors
 class PlantsVsZombiesModel {
-	Jugador jugador
+	Jugador jugadorActual
 
 	//Actores principales del juego
 	JardinDeJuego jardinDeJuego
-	JardinZen jardinZen
+	JardinZen jardinZenJuego
 	List<Zombie> zombies
 
 	//Selecciones
@@ -57,19 +57,19 @@ class PlantsVsZombiesModel {
 	List<Mejora> mejorasCompradas
 
 	new() {
-		inicializarElemntosDeJuego
+		inicializarElementosDeJuego
 	}
 
-	def inicializarElemntosDeJuego() {
-		jardinDeJuego = new JardinDeJuego()
-		jardinZen = new JardinZen
+	def inicializarElementosDeJuego() {
+		jardinDeJuego = new JardinDeJuego
+		jardinZenJuego = new JardinZen
 		recompensaObserver = new Recompensador
-		jugador = new Jugador("nombre x default")
+		jugadorActual = new Jugador("nombre x default")
 		jardinDeJuego.crearTablero(5, 5)
 		agregarPlantasAlJardinDeJuego
 		tipoDePlantaSeleccionada = new TipoTerrestre
-		jardinZen.plantas = homePlantas.allInstances.toList
-		plantinSeleccionado = jardinZen.plantas.get(0)
+		jardinZenJuego.plantas = repoPlantas.allInstances.toList
+		plantinSeleccionado = jardinZenJuego.plantas.get(0)
 		crearZombies
 		crearMejoras
 	}
@@ -77,15 +77,15 @@ class PlantsVsZombiesModel {
 	def crearMejoras() {
 		mejoras = new ArrayList
 		mejorasCompradas = new ArrayList
-		homeMejoras.allInstances.toList.forEach[m|mejoras.add(m)]
+		repoMejoras.allInstances.toList.forEach[m|mejoras.add(m)]
 	}
 
 	def getCantidadDeLugaresDisponibles() {
-		jardinZen.cantidadDeLugaresLibres(tipoDePlantaSeleccionada)
+		jardinZenJuego.cantidadDeLugaresLibres(tipoDePlantaSeleccionada)
 	}
 
 	def getPlantas() {
-		jardinZen.getPlantasDeUnTipo(tipoDePlantaSeleccionada)
+		jardinZenJuego.getPlantasDeUnTipo(tipoDePlantaSeleccionada)
 	}
 
 	def atacar() {
@@ -110,7 +110,7 @@ class PlantsVsZombiesModel {
 	}
 
 	def agregarPlantasAlaFila(Fila fila) {
-		var plantas = homePlantas.getPlantasDeUnTipo(fila.tipo)
+		var plantas = repoPlantas.getPlantasDeUnTipo(fila.tipo)
 		val shuffle = new Shuffle<Planta>
 		plantas = shuffle.doTask(plantas)
 		val cantidadDeCasilleros = fila.getCantidadDeCasilleros
@@ -128,7 +128,7 @@ class PlantsVsZombiesModel {
 
 	def void crearZombies() {
 		val shuffle = new Shuffle<Zombie>
-		val zombiesAux = shuffle.doTask(homeZombies.allInstances)
+		val zombiesAux = shuffle.doTask(repoZombies.allInstances)
 		val rand = new Random()
 		val numeroRandom = rand.nextInt(2) + 2 //Entre 2 y 2 zombies
 		zombies = zombiesAux.subList(0, numeroRandom)
@@ -136,8 +136,9 @@ class PlantsVsZombiesModel {
 	}
 
 	def seleccionarZombieNumeroUno() {
-		if (zombies.size > 0)
+		if (zombies.size > 0) {
 			zombieSeleccionado = zombies.get(0)
+		}
 	}
 	
 	def actualizarListaPlantas() {
@@ -151,22 +152,22 @@ class PlantsVsZombiesModel {
 		this.jardinDeJuego.filas = filas
 		this.filaSeleccionada = this.jardinDeJuego.filas.get(numeroDeFila)
 
-		val plantines = this.jardinZen.plantas as ArrayList<Planta>
-		this.jardinZen.plantas = null
-		this.jardinZen.plantas = plantines
-		val last = this.jardinZen.plantas.size
-		this.plantinSeleccionado = this.jardinZen.plantas.get(last - 1)
+		val plantines = this.jardinZenJuego.plantas as ArrayList<Planta>
+		this.jardinZenJuego.plantas = null
+		this.jardinZenJuego.plantas = plantines
+		val last = this.jardinZenJuego.plantas.size
+		this.plantinSeleccionado = this.jardinZenJuego.plantas.get(last - 1)
 	}
 
-	def HomeZombies getHomeZombies() {
+	def RepoZombies getRepoZombies() {
 		ApplicationContext.instance.getSingleton(typeof(Zombie))
 	}
 
-	def HomePlantas getHomePlantas() {
+	def RepoPlantas getRepoPlantas() {
 		ApplicationContext.instance.getSingleton(typeof(Planta))
 	}
-
-	def HomeMejoras getHomeMejoras() {
+	
+	def RepoMejoras getRepoMejoras() {
 		ApplicationContext.instance.getSingleton(typeof(Mejora))
 	}
 
@@ -179,13 +180,12 @@ class PlantsVsZombiesModel {
 	}
 
 	def createRecompensaObserver() {
-		// Tuve que echar atras el operador with (=>) porque tenia problemas con los mensajes de this 
-		val recompensador = new Recompensador
-		recompensador.jugador = jugador
-		recompensador.jardinZen = jardinZen
-		recompensador.zombie = zombieSeleccionado
-		recompensador.homePlantas = homePlantas
-		recompensador
+		new Recompensador => [
+			jugador = jugadorActual
+			jardinZen = jardinZenJuego
+			zombie = zombieSeleccionado
+			repoPlantas = getRepoPlantas
+		]
 	}
 
 	def perdioElJuego() {
@@ -193,11 +193,11 @@ class PlantsVsZombiesModel {
 	}
 
 	def ganoElJuego() {
-		zombies.size == 0
+		zombies.isEmpty
 	}
 
 	def mejorarPlanta() {
-		val mejorador = new MejoradorDePlantas(jugador)
+		val mejorador = new MejoradorDePlantas(jugadorActual)
 		mejorador.mejorar(plantinSeleccionado, mejoraDisponibleSeleccionada)
 		mejorasCompradas.add(mejoraDisponibleSeleccionada)
 	}

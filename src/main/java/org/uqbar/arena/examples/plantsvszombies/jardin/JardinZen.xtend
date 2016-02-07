@@ -12,9 +12,9 @@ class JardinZen implements Jardin {
 	List<Planta> plantas
 
 	override cantidadDePlantasDeUnTipo(TipoDePlanta unTipo) {
-		plantas.filter[p|p.tipo.equals(unTipo)].size
+		getPlantasDeUnTipo(unTipo).size
 	}
-
+	
 	def cantidadDeLugaresLibres(TipoDePlanta unTipo) {
 		cantidadMaximaDePlantas - cantidadDePlantasDeUnTipo(unTipo)
 	}
