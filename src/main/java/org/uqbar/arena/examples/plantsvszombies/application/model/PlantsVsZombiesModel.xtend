@@ -17,14 +17,14 @@ import org.uqbar.arena.examples.plantsvszombies.planta.TipoAcuatica
 import org.uqbar.arena.examples.plantsvszombies.planta.TipoDePlanta
 import org.uqbar.arena.examples.plantsvszombies.planta.TipoTerrestre
 import org.uqbar.arena.examples.plantsvszombies.recompensa.Recompensador
-import org.uqbar.arena.examples.plantsvszombies.util.Shuffle
-import org.uqbar.arena.examples.plantsvszombies.zombie.Zombie
-import org.uqbar.commons.model.UserException
-import org.uqbar.commons.utils.ApplicationContext
-import org.uqbar.commons.utils.Observable
 import org.uqbar.arena.examples.plantsvszombies.repo.RepoMejoras
 import org.uqbar.arena.examples.plantsvszombies.repo.RepoPlantas
 import org.uqbar.arena.examples.plantsvszombies.repo.RepoZombies
+import org.uqbar.arena.examples.plantsvszombies.util.Shuffle
+import org.uqbar.arena.examples.plantsvszombies.zombie.Zombie
+import org.uqbar.commons.applicationContext.ApplicationContext
+import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.exceptions.UserException
 
 /**
  * 

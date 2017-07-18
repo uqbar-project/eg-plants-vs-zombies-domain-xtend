@@ -5,9 +5,9 @@ import java.util.Random
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.arena.examples.plantsvszombies.jardin.JardinZen
 import org.uqbar.arena.examples.plantsvszombies.personaje.Jugador
-import org.uqbar.arena.examples.plantsvszombies.zombie.Zombie
-import org.uqbar.commons.utils.Observable
 import org.uqbar.arena.examples.plantsvszombies.repo.RepoPlantas
+import org.uqbar.arena.examples.plantsvszombies.zombie.Zombie
+import org.uqbar.commons.model.annotations.Observable
 
 @Observable
 @Accessors

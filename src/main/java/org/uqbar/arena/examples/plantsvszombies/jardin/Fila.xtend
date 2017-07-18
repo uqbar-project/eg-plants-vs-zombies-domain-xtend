@@ -7,7 +7,7 @@ import org.uqbar.arena.examples.plantsvszombies.exception.NoHayLugarException
 import org.uqbar.arena.examples.plantsvszombies.exception.TipoInvalidoDePlantaException
 import org.uqbar.arena.examples.plantsvszombies.planta.Planta
 import org.uqbar.arena.examples.plantsvszombies.planta.TipoDePlanta
-import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.model.annotations.Observable
 
 @Observable
 @Accessors

@@ -1,7 +1,7 @@
 package org.uqbar.arena.examples.plantsvszombies.zombie
 
 import org.uqbar.arena.examples.plantsvszombies.personaje.Personaje
-import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.model.annotations.Observable
 
 @Observable
 class Zombie extends Personaje {

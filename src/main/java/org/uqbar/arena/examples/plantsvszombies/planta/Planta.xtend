@@ -3,7 +3,7 @@ package org.uqbar.arena.examples.plantsvszombies.planta
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.arena.examples.plantsvszombies.exception.ConfigurationException
 import org.uqbar.arena.examples.plantsvszombies.personaje.Personaje
-import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.model.annotations.Observable
 
 @Observable
 @Accessors

@@ -7,7 +7,7 @@ import org.uqbar.arena.examples.plantsvszombies.jardin.Fila
 import org.uqbar.arena.examples.plantsvszombies.planta.Planta
 import org.uqbar.arena.examples.plantsvszombies.recompensa.RecompensaObserver
 import org.uqbar.arena.examples.plantsvszombies.zombie.Zombie
-import org.uqbar.commons.model.UserException
+import org.uqbar.commons.model.exceptions.UserException
 
 class Ataque {
 	Fila fila

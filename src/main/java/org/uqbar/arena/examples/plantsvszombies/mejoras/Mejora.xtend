@@ -1,8 +1,8 @@
 package org.uqbar.arena.examples.plantsvszombies.mejoras
 
-import org.uqbar.commons.model.Entity
-import org.uqbar.commons.utils.Observable
 import org.uqbar.arena.examples.plantsvszombies.planta.Planta
+import org.uqbar.commons.model.Entity
+import org.uqbar.commons.model.annotations.Observable
 
 @Observable
 abstract class Mejora extends Entity {
